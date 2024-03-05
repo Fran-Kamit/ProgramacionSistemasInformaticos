@@ -3,77 +3,41 @@ package unidad5;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Actividad5_6 {
+public class Actividad5_5 {
     public static void main(String[] args) {
-        System.out.println(" Definir una función que tome como parámetro dos tablas, "
-                + "la primera con los 6 números de\nuna apuesta de la primitiva, y "
-                + "la segunda (ordenada) con los 6 números de la combinación\nganadora. "
-                + "La función devolverá el número de aciertos.\n");
+        System.out.println(" Crea y devuelve una tabla ordenada que se encuentra rellenada con números " +
+                "pares aleatorios.\n");
 
         Scanner sc = new Scanner(System.in);
+        int longitud, fin;
 
-        System.out.println("Introduzca su apuesta.");
-        int apuesta[] = new int [6];
-        int numero1;
+        do {
+            System.out.print("¿Qué longitud de tabla desea? (>= 1) ");
+            longitud = sc.nextInt();
+        }while (longitud < 1);
 
-        for (int i = 0; i < apuesta.length; i++) {
-            do {
-                System.out.print("Introduzca número -> ");
-                numero1 = sc.nextInt();
-                if (numero1 < 1 || numero1 > 49){
-                    System.out.println("Número no válido.");
-                } else {
-                    int indice1 = 0;
-                    while (indice1 < apuesta.length && apuesta[indice1] != numero1) {
-                        indice1++;
-                    }
-                    if (indice1 >= apuesta.length) {
-                        apuesta[i] = numero1;
-                    } else {
-                        i--;
-                        System.out.println("Número repetido.");
-                    }
-                }
-            }while(apuesta[i] < 1 || apuesta[i] > 49);
-        }
+        do {
+            System.out.print("Introduzca el nº máximo (>= 2) ");
+            fin = sc.nextInt();
+        }while (fin < 2);
 
-        /*Combinación ganadora*/
-        int[] combGanadora = new int [6];
-        int numero2;
+        System.out.println();
 
-        for (int i = 0; i < combGanadora.length; i++) {
-            numero2 = (int) (Math.random() * 49 + 1);
-            //si el aleatorio duplica un número, hay que validarlo para que no se duplique
-
-            int indice2 = 0;
-            while (indice2 < combGanadora.length && combGanadora[indice2] != numero2) {
-                indice2++;
-            }
-            if (indice2 >= combGanadora.length) {
-                combGanadora[i] = numero2;
-            } else {
-                i--;
-            }
-
-        }
-        //Ordenamos los Arrays
-        Arrays.sort(combGanadora);
-        Arrays.sort(apuesta);
-        /////
-
-        System.out.println("Tu apuesta -> " + Arrays.toString(apuesta));
-        System.out.println("Apuesta ganadora -> " + Arrays.toString(combGanadora));
-        System.out.println("\nNúmero de aciertos: " + primitiva(apuesta, combGanadora));
+        rellenaPares(longitud, fin);
     }
+    static int [] rellenaPares(int longitud, int fin){
+        int pares[] = new int [longitud];
+        int i = 0, num;
 
-    static int primitiva(int apuesta[], int combGanadora[]) {
-        int aciertos = 0;
-
-        for (int i : apuesta) {
-            if (Arrays.binarySearch(combGanadora, i) >= 0) {
-                aciertos++;
+        while (i < pares.length){
+            num = (int)(Math.random()*fin + 1);
+            if (num % 2 == 0){
+                pares [i] = num;
+                i++;
             }
         }
-        return (aciertos);
+        Arrays.sort(pares);
+        System.out.println(Arrays.toString(pares));
+        return (pares);
     }
 }
