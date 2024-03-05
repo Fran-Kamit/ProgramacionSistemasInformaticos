@@ -22,17 +22,17 @@ public class Actividad5_6 {
                 numero1 = sc.nextInt();
                 if (numero1 < 1 || numero1 > 49){
                     System.out.println("Número no válido.");
-                }
-
-                int indice1 = 0;
-                while (indice1 < apuesta.length && apuesta[i] != numero1){
-                    indice1++;
-                }
-                if (indice1 >= apuesta.length){
-                    apuesta[i] = numero1;
                 } else {
-                    i--;
-                    System.out.println("Número repetido.");
+                    int indice1 = 0;
+                    while (indice1 < apuesta.length && apuesta[indice1] != numero1) {
+                        indice1++;
+                    }
+                    if (indice1 >= apuesta.length) {
+                        apuesta[i] = numero1;
+                    } else {
+                        i--;
+                        System.out.println("Número repetido.");
+                    }
                 }
             }while(apuesta[i] < 1 || apuesta[i] > 49);
         }
@@ -46,7 +46,7 @@ public class Actividad5_6 {
             //si el aleatorio duplica un número, hay que validarlo para que no se duplique
 
             int indice2 = 0;
-            while (indice2 < combGanadora.length && combGanadora[i] != numero2) {
+            while (indice2 < combGanadora.length && combGanadora[indice2] != numero2) {
                 indice2++;
             }
             if (indice2 >= combGanadora.length) {
@@ -56,6 +56,10 @@ public class Actividad5_6 {
             }
 
         }
+        //Ordenamos los Arrays
+        Arrays.sort(combGanadora);
+        Arrays.sort(apuesta);
+        /////
 
         System.out.println("Tu apuesta -> " + Arrays.toString(apuesta));
         System.out.println("Apuesta ganadora -> " + Arrays.toString(combGanadora));
@@ -63,10 +67,6 @@ public class Actividad5_6 {
     }
 
     static int primitiva(int apuesta[], int combGanadora[]) {
-        //Ordenamos los Arrays
-        Arrays.sort(combGanadora);
-        Arrays.sort(apuesta);
-        /////
         int aciertos = 0;
 
         for (int i : apuesta) {
